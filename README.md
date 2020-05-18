@@ -14,6 +14,7 @@
 - En la terminal con el proyecto escribe: composer install
 - Al terminar escribe: php artisan key:generate
 - Para iniciar usa php artisan serve
+- Para crear las migraciones con los seeders(datos de prueba), ejecuten php artisan migrate --seed
 
 Porfavor, crea tu branch.
 
