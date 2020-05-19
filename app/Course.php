@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
+
 
 /**
  * App\Course
@@ -62,7 +64,7 @@ class Course extends Model
 
         static::saving(function(Course $course) {
             if( ! \App::runningInConsole() ) {
-                $course->slug = str_slug($course->name, "-");
+                $course->slug = str::slug($course->name, "-");
             }
         });
 
