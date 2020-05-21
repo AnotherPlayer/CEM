@@ -15,6 +15,9 @@
 - Porfavor, copia el contenido de .env.example en un archivo llamado .env
 - Al terminar escribe: php artisan key:generate
 - Para iniciar usa php artisan serve
+- Para crear las migraciones con los seeders(datos de prueba), ejecuten php artisan migrate --seed
+- Se anexó la base de datos cursos_map.sql
+- Las credenciales son admin_cem@gmail.com   student@gmail.com   teacher_cem@gmail.com, todos llevan la misma contraseña : "password"
 
 - Para crear las migraciones con los seeders(datos de prueba), ejecuten php artisan migrate --seed
 - Se anexó la base de datos cursos_map.sql
