@@ -2,7 +2,7 @@
 
 @section('information')
     @include('partials.information',[
-        "title" => __("Accede a cualquier curso"),
+        "title" => __("Plataforma de Asesorías de Matemáticas CEM"),
 
     ])
 @endsection
