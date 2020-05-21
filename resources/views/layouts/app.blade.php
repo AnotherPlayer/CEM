@@ -22,6 +22,8 @@
 <body>
     @include('partials.navigation')
 
+    @yield('information')
+
 
         <main class="py-4">
             @yield('content')
