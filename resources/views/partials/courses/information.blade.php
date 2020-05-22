@@ -17,7 +17,7 @@
 
                 </div>
 
-
+                @include('partials.courses.action_button')
             </div>
         </div>
     </div>
