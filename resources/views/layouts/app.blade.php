@@ -9,8 +9,6 @@
 
     <title>{{ config('app.name', 'CEM') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,16 +16,33 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @stack('styles')
 </head>
 <body>
-    @include('partials.navigation')
+@include('partials.navigation')
 
-    @yield('information')
+@yield('information')
 
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+<div id="app">
+
+    <main class="py-4">
+        @if(session('message'))
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="alert alert-{{ session('message')[0] }}">
+                        <h4 class="alert-heading">{{ __("Mensaje informativo") }}</h4>
+                        <p>{{ session('message')[1] }}</p>
+                    </div>
+                </div>
+            </div>
+        @endif
+        @yield('content')
+    </main>
+</div>
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}" defer></script>
+@stack('scripts')
+
 </body>
 </html>
