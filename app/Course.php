@@ -58,21 +58,22 @@ class Course extends Model
 
     protected $withCount = ['reviews', 'students'];
 
-    public static function boot () {
+    public static function boot()
+    {
         parent::boot();
 
-        static::saving(function(Course $course) {
-            if( ! \App::runningInConsole() ) {
+        static::saving(function (Course $course) {
+            if (!\App::runningInConsole()) {
                 $course->slug = Str::slug($course->name, "-");
             }
         });
 
         static::saved(function (Course $course) {
-            if ( ! \App::runningInConsole()) {
-                if ( request('requirements')) {
+            if (!\App::runningInConsole()) {
+                if (request('requirements')) {
                     foreach (request('requirements') as $key => $requirement_input) {
                         if ($requirement_input) {
-                            Requirement::updateOrCreate(['id' => request('requirement_id'. $key)], [
+                            Requirement::updateOrCreate(['id' => request('requirement_id' . $key)], [
                                 'course_id' => $course->id,
                                 'requirement' => $requirement_input
                             ]);
@@ -80,10 +81,10 @@ class Course extends Model
                     }
                 }
 
-                if(request('goals')) {
-                    foreach(request('goals') as $key => $goal_input) {
-                        if( $goal_input) {
-                            Goal::updateOrCreate(['id' => request('goal_id'.$key)], [
+                if (request('goals')) {
+                    foreach (request('goals') as $key => $goal_input) {
+                        if ($goal_input) {
+                            Goal::updateOrCreate(['id' => request('goal_id' . $key)], [
                                 'course_id' => $course->id,
                                 'goal' => $goal_input
                             ]);
@@ -94,50 +95,61 @@ class Course extends Model
         });
     }
 
-    public function pathAttachment () {
+    public function pathAttachment()
+    {
         return "/images/courses/" . $this->picture;
     }
 
-    public function getRouteKeyName() {
+    public function getRouteKeyName()
+    {
         return 'slug';
     }
 
-    public function category () {
+    public function category()
+    {
         return $this->belongsTo(Category::class)->select('id', 'name');
     }
 
-    public function goals () {
+    public function goals()
+    {
         return $this->hasMany(Goal::class)->select('id', 'course_id', 'goal');
     }
 
-    public function level () {
+    public function level()
+    {
         return $this->belongsTo(Level::class)->select('id', 'name');
     }
 
-    public function reviews () {
+    public function reviews()
+    {
         return $this->hasMany(Review::class)->select('id', 'user_id', 'course_id', 'rating', 'comment', 'created_at');
     }
 
-    public function requirements () {
+    public function requirements()
+    {
         return $this->hasMany(Requirement::class)->select('id', 'course_id', 'requirement');
     }
 
-    public function students () {
+    public function students()
+    {
         return $this->belongsToMany(Student::class);
     }
 
-    public function teacher () {
+    public function teacher()
+    {
         return $this->belongsTo(Teacher::class);
     }
 
-    public function getCustomRatingAttribute () {
+    public function getCustomRatingAttribute()
+    {
         return $this->reviews->avg('rating');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|static[]
      */
-    public function relatedCourses () {
+    public function relatedCourses()
+    {
         return Course::with('reviews')->whereCategoryId($this->category->id)
             ->where('id', '!=', $this->id)
             ->latest()

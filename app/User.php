@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laravel\Cashier\Billable;
 use Illuminate\Support\Str;
+use Laravel\Cashier\Billable;
 
 /**
  * App\User
@@ -55,7 +55,7 @@ class User extends Authenticatable
         parent::boot();
         static::creating(function (User $user) {
             if( ! \App::runningInConsole()) {
-                $user->slug = str::slug($user->name . " " . $user->last_name, "-");
+                $user->slug = Str::slug($user->name . " " . $user->last_name, "-");
             }
         });
     }
