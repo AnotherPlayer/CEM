@@ -50,4 +50,10 @@ class CourseController extends Controller
     public function addReview () {
 
     }
+
+    public function create(){
+        $course = new Course;
+        $btnText = __("Enviar Curso a Revision");
+        return view('courses.form', compact('course', 'btnText'));
+    }
 }

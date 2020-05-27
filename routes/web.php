@@ -39,6 +39,13 @@ Route::group(['prefix' => 'courses'], function () {
             ->name('courses.inscribe');
         Route::post('/add_review', 'CourseController@addReview')
             ->name('courses.add_review');
+
+        Route::get('/create', 'CourseController@create')
+            ->name('courses.create')
+            ->middleware([sprintf("role:%s", \App\Role::TEACHER)]);
+        Route::post('/store', 'CourseController@store')
+            ->name('courses.store')
+            ->middleware([sprintf("role:%s", \App\Role::TEACHER)]);
     });
 
     Route::get('/{course}', 'CourseController@show')->name('courses.detail');
