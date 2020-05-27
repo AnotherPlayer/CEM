@@ -100,9 +100,32 @@
                     </div>
                 </div>
 
+                @if( ! $user->teacher)
+                    <div class="card">
+                        <div class="card-header">
+                            {{ __("Convertirme en profesor de la plataforma") }}
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ route('solicitude.teacher') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-primary btn-block">
+                                    {{ __("Solicitar") }}
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                @else
+                    si lo es
+                @endif
+
 
             </div>
         </div>
+    </div>
+
+
+    </div>
+    </div>
     </div>
 @endsection
 
