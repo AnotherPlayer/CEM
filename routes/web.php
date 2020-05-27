@@ -23,11 +23,13 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-/*Route::group(['prefix'=>'courses'],function (){
-    Route::get('/{course}/inscribe','CourseController@inscribe')
-        ->name('courses.inscribe')->middleware('auth');
-    Route::get('/{course}','CourseController@show')->name('courses.detail');
-});*/
+Route::get('/images/{path}/{attachment}', function($path, $attachment) {
+    $file = sprintf('storage/%s/%s', $path, $attachment);
+    if(File::exists($file)) {
+        return Image::make($file)->response();
+    }
+});
+
 Route::group(['prefix' => 'courses'], function () {
 
     Route::group(['middleware' => ['auth']], function () {
@@ -49,10 +51,9 @@ Route::group(["prefix" => "subscriptions"], function () {
         ->name('subscriptions.process_subscription');
 });
 
-Route::get('/images/{path}/{attachment}', function ($path, $attachment) {
-    $file = sprintf('storage/%s/%s', $path, $attachment);
-    if (File::exists($file)) {
-        return Image::make($file)->response();
-    }
+Route::group(["prefix" => "profile", "middleware" => ["auth"]], function() {
+    Route::get('/', 'ProfileController@index')->name('profile.index');
+    Route::put('/', 'ProfileController@update')->name('profile.update');
 });
+
 
