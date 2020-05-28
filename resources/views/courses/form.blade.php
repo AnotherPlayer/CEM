@@ -46,7 +46,7 @@
                                 <div class="col-md-6">
                                     <select name="level_id" id="level_id" class="form-control">
                                         @foreach(\App\Level::pluck('name','id') as $id=>$level)
-                                            <option {{old('level_id') === $id || $course->level_id === $id ? 'selected' : ''}} value="{{$id}}">
+                                            <option {{(int)old('level_id') === $id || $course->level_id === $id ? 'selected' : ''}} value="{{$id}}">
                                                 {{ $level }}
                                             </option>
                                         @endforeach
@@ -61,7 +61,7 @@
                                 <div class="col-md-6">
                                     <select name="category_id" id="category_id" class="form-control">
                                         @foreach(\App\Category::groupBy('name')->pluck('name','id') as $id=>$category)
-                                            <option {{old('category_id') === $id || $course->category_id === $id ? 'selected' : ''}} value="{{$id}}">
+                                            <option {{(int)old('category_id') === $id || $course->category_id === $id ? 'selected' : ''}} value="{{$id}}">
                                                 {{ $category }}
                                             </option>
                                         @endforeach
@@ -119,17 +119,17 @@
                                     <input type="hidden" name="requirement_id0" value="{{ $course->requirements[0]->id }}"/>
                                 @endif
                             </div>
-
+                            <br>
                             {{-- Requerimiento 2 --}}
                             <div class="form-row row">
                                 <label for="requirement2" class="col-md-4 col-form-label text-md-right">
                                     {{__("Requerimiento 2")}}
                                 </label>
                                 <div class="col-md-6">
-                                <input id="requirement1" class="form-control{{ $errors->has('requirements.1') ? ' is-invalid' : ''}}" name="requirements[]"
+                                <input id="requirement2" class="form-control{{ $errors->has('requirements.1') ? ' is-invalid' : ''}}" name="requirements[]"
                                     value="{{old('requirements.1') ? old('requirements.1') : ($course->requirements_count > 1 ? $course->requirements[1]->requirement : '')}}"/>
 
-                                    @if($errors->has('requirements.0'))
+                                    @if($errors->has('requirements.1'))
                                         <span class="invalid-feedback">
                                         <strong>{{  $errors->first('requirements.1') }}</strong>
                                         </span>
@@ -143,7 +143,66 @@
                     </div>
                 </div>
                 {{-- Metas del Curso--}}
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            {{__("Que obtendra el alumno con este curso?")}}
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row row">
+                                <label for="goal1" class="col-md-4 col-form-label text-md-right">
+                                    {{__("Meta 1")}}
+                                </label>
+                                <div class="col-md-6">
+                                <input id="goal1" class="form-control{{ $errors->has('goals.0') ? ' is-invalid' : ''}}" name="goals[]"
+                                    value="{{old('goals.0') ? old('goals.0') : ($course->goals_count > 0 ? $course->goals[0]->goal : '')}}"/>
 
+                                    @if($errors->has('goals.0'))
+                                        <span class="invalid-feedback">
+                                        <strong>{{  $errors->first('goals.0') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                @if($course->goals_count > 0)
+                                    <input type="hidden" name="goald_id0" value="{{ $course->goals[0]->id }}"/>
+                                @endif
+                            </div>
+                            <br>
+                            {{-- Meta 2 --}}
+                            <div class="form-row row">
+                                <label for="goal2" class="col-md-4 col-form-label text-md-right">
+                                    {{__("Meta 2")}}
+                                </label>
+                                <div class="col-md-6">
+                                <input id="goal2" class="form-control{{ $errors->has('goals.1') ? ' is-invalid' : ''}}" name="goals[]"
+                                    value="{{old('goals.1') ? old('goals.1') : ($course->goals_count > 1 ? $course->goals[1]->goal : '')}}"/>
+
+                                    @if($errors->has('goals.1'))
+                                        <span class="invalid-feedback">
+                                        <strong>{{  $errors->first('requirements.1') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                @if($course->goals_count > 1)
+                                    <input type="hidden" name="goal_id1" value="{{ $course->goals[1]->id }}"/>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group row mb-0">
+                                <div class="col-md-4 offset-5">
+                                    <button type="submit" name="revision" class="btn btn-danger">
+                                        {{__($btnText)}}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>

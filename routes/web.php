@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Stripe\File;
 
@@ -25,7 +26,7 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/images/{path}/{attachment}', function($path, $attachment) {
     $file = sprintf('storage/%s/%s', $path, $attachment);
-    if(File::exists($file)) {
+    if(Storage::exists($file)) {
         return Image::make($file)->response();
     }
 });

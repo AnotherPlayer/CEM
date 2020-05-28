@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Helpers\Helper;
+use App\Http\Requests\CourseRequest;
 use App\Mail\NewStudentInCourse;
 use App\Review;
 use Illuminate\Http\Request;
@@ -55,5 +57,13 @@ class CourseController extends Controller
         $course = new Course;
         $btnText = __("Enviar Curso a Revision");
         return view('courses.form', compact('course', 'btnText'));
+    }
+
+    public function store (CourseRequest $course_request) {
+        $picture = Helper::uploadFile('picture','courses');
+        $course_request->merge(['picture' => $picture]);
+        $course_request->merge(['teacher_id' => auth()->user()->teacher->id]);
+        $course_request->merge(['status' => Course::PENDING]);
+        Course::create($course_request->input());
     }
 }
