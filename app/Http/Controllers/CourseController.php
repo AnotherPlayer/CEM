@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
-use App\Helpers\Helper;
+use App\Helper\Helper;
 use App\Http\Requests\CourseRequest;
 use App\Mail\NewStudentInCourse;
 use App\Review;
@@ -65,5 +65,6 @@ class CourseController extends Controller
         $course_request->merge(['teacher_id' => auth()->user()->teacher->id]);
         $course_request->merge(['status' => Course::PENDING]);
         Course::create($course_request->input());
+        return back()->with('message',['success', __("Curso enviado de manera correcta, pendiende de aprobacion")]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Mail\MessageToStudent;
 use App\Student;
+use Yajra\DataTables\DataTables;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class TeacherController extends Controller
             })->get();
 
         $actions = 'students.datatables.actions';
-        return \DataTables::of($students)->addColumn('actions', $actions)->rawColumns(['actions', 'courses_formatted'])->make(true);
+        return DataTables::of($students)->addColumn('actions', $actions)->rawColumns(['actions', 'courses_formatted'])->make(true);
     }
 
     public function sendMessageToStudent()
