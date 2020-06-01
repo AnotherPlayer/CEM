@@ -12,6 +12,12 @@ use Illuminate\Http\Request;
 class TeacherController extends Controller
 {
 
+    public function courses()
+    {
+        $courses = Course::withCount(['students'])->with('category', 'reviews')
+            ->whereTeacherId(auth()->user()->teacher->id)->paginate(10);
+        return view('teachers.courses', compact('courses'));
+    }
 
     public function students()
     {

@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="pl-5 pr-5">
-        <form method="POST" action="{{! $course->id ? route('courses.store') : route('courses.update', ['slug'=>$course->slug])}}"
+        <form method="POST" action="{{!  $course->id ? route('courses.store') : route('courses.update', $course->slug)}}"
             novalidate enctype="multipart/form-data">
 
             @if($course->id)
@@ -19,7 +19,7 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header">
-                            {{__("Informacion del Curso")}}
+                            {{__("Información del Curso")}}
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
@@ -27,7 +27,7 @@
                                     {{__("Nombre del curso")}}
                                 </label>
                                 <div class="col-md-6">
-                                <input name="name" id="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : ''}}"
+                                <input name="name" id="name"  readonly  class="form-control{{ $errors->has('name') ? ' is-invalid' : ''}}"
                                 value="{{ old('name') ?: $course->name}}" required autofocus/>
 
                                 @if($errors->has('name'))
@@ -56,7 +56,7 @@
                         </div>
                             <div class="form-group row">
                                 <label for="category_id" class="col-sm-4 col-form-label text-md-right">
-                                    {{__("Categoria del curso")}}
+                                    {{__("Categoría del curso")}}
                                 </label>
                                 <div class="col-md-6">
                                     <select name="category_id" id="category_id" class="form-control">
@@ -73,13 +73,13 @@
                                 <input type="file" class="custom-file-input{{ $errors->has('picture')? ' is-invalid' : ''}}"
                                     id="picture" name="picture"/>
                                 <label class="custom-file-label" for="picture">
-                                    {{__("Escoje una imagen para tu curso")}}
+                                    {{__("Elija una imagen para tu curso")}}
                                 </label>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="description" class="col-md-4 col-form-label text-md-right">
-                                {{__("Descripcion del curso")}}
+                                {{__("Descripción del curso")}}
                             </label>
                             <div class="col-md-6">
                                 <textarea id="description" class="form-control{{ $errors->has('description') ? ' is-invalid' : ''}}"
@@ -146,7 +146,7 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header">
-                            {{__("Que obtendra el alumno con este curso?")}}
+                            {{__("¿Qué obtendrá el alumno con este curso?")}}
                         </div>
                         <div class="card-body">
                             <div class="form-row row">
@@ -195,7 +195,7 @@
                         <div class="card-body">
                             <div class="form-group row mb-0">
                                 <div class="col-md-4 offset-5">
-                                    <button type="submit" name="revision" class="btn btn-danger">
+                                    <button type="submit" name="revision" class="btn btn-info">
                                         {{__($btnText)}}
                                     </button>
                                 </div>

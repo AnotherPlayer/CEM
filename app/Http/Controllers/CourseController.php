@@ -49,22 +49,56 @@ class CourseController extends Controller
         return view('courses.subscribed', compact('courses'));
 
     }
-    public function addReview () {
+
+    public function addReview()
+    {
 
     }
 
-    public function create(){
+    public function create()
+    {
         $course = new Course;
-        $btnText = __("Enviar Curso a Revision");
+        $btnText = __("Enviar Curso a Revisión");
         return view('courses.form', compact('course', 'btnText'));
     }
 
-    public function store (CourseRequest $course_request) {
-        $picture = Helper::uploadFile('picture','courses');
+    public function store(CourseRequest $course_request)
+    {
+        $picture = Helper::uploadFile('picture', 'courses');
         $course_request->merge(['picture' => $picture]);
         $course_request->merge(['teacher_id' => auth()->user()->teacher->id]);
         $course_request->merge(['status' => Course::PENDING]);
         Course::create($course_request->input());
-        return back()->with('message',['success', __("Curso enviado de manera correcta, pendiende de aprobacion")]);
+        return back()->with('message', ['success', __("Curso enviado de manera correcta, pendiente de aprobación")]);
+    }
+
+    public function edit($slug)
+    {
+        $course = Course::with(['requirements', 'goals'])->withCount(['requirements', 'goals'])
+            ->whereSlug($slug)->first();
+        $btnText = __("Actualizar Curso");
+        return view('courses.form', compact('course', 'btnText'));
+    }
+
+    public function update(CourseRequest $course_request, Course $course)
+    {
+        if($course_request->hasFile('picture')) {
+            \Storage::delete('courses/' . $course->picture);
+            $picture = Helper::uploadFile( "picture", 'courses');
+            $course_request->merge(['picture' => $picture]);
+        }
+        $course->fill($course_request->input())->save();
+        return back()->with('message', ['success', __('Curso Actualizado con Éxito')]);
+    }
+
+
+    public function destroy(Course $course)
+    {
+        try {
+            $course->delete();
+            return back()->with('message', ['success', __("Curso eliminado correctamente")]);
+        } catch (\Exception $exception) {
+            return back()->with('message', ['danger', __("Error eliminando el curso")]);
+        }
     }
 }
