@@ -5,7 +5,13 @@
         </div>
         <v-server-table ref="table" :columns="columns" :url="url" :options="options">
 
+            <!-- AÑADIMOS EL SLOT TEACHER PARA VER EL PROFESOR DEL CURSO -->
+            <div slot="teacher" slot-scope="props">
+                <p>{{ props.row.teacher.title }}</p>
+            </div>
+
             <div slot="activate_deactivate" slot-scope="props">
+
                 <button
                     v-if="parseInt(props.row.status) === 1"
                     type="button"
@@ -44,6 +50,7 @@
 
 <script>
     import {Event} from 'vue-tables-2';
+
     export default {
         name: "courses",
         props: {
@@ -56,18 +63,21 @@
                 required: true
             }
         },
-        data () {
+        data() {
             return {
                 processing: false,
                 status: null,
                 url: this.route,
-                columns: ['id', 'name', 'status', 'activate_deactivate'],
+                /*********************AÑADIMOS TEACHER A LAS COLUMNAS*********************/
+                columns: ['id', 'teacher', 'name', 'status', 'activate_deactivate'],
                 options: {
                     filterByColumn: true,
                     perPage: 10,
                     perPageValues: [10, 25, 50, 100, 500],
+                    /*********************AÑADIMOS TEACHER A LAS CABECERAS*********************/
                     headings: {
                         id: 'ID',
+                        teacher: this.labels.teacher,
                         name: this.labels.name,
                         status: this.labels.status,
                         activate_deactivate: this.labels.activate_deactivate,
@@ -75,7 +85,9 @@
                         reject: this.labels.reject,
                     },
                     customFilters: ['status'],
-                    sortable: ['id', 'name', 'status'],
+                    /*********************AÑADIMOS TEACHER A LAS ORDENACIÓN*********************/
+                    customFilters: ['status'],
+                    sortable: ['id', 'teacher', 'name', 'status'],
                     filterable: ['name'],
                     requestFunction: function (data) {
                         return window.axios.get(this.url, {
@@ -89,10 +101,10 @@
             }
         },
         methods: {
-            filterByStatus () {
+            filterByStatus() {
                 parseInt(this.status) !== 0 ? Event.$emit('vue-tables.filter::status', this.status) : null;
             },
-            formattedStatus (status) {
+            formattedStatus(status) {
                 const statuses = [
                     null,
                     'Publicado',
@@ -101,7 +113,7 @@
                 ];
                 return statuses[status];
             },
-            updateStatus (row, newStatus) {
+            updateStatus(row, newStatus) {
                 this.processing = true;
                 setTimeout(() => {
                     this.$http.post(
@@ -117,7 +129,6 @@
                             this.$refs.table.refresh();
                         })
                         .catch(error => {
-
                         })
                         .finally(() => {
                             this.processing = false;
@@ -129,7 +140,7 @@
 </script>
 
 <style>
-    .table-bordered>thead>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>tfoot>tr>td {
+    .table-bordered > thead > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > tfoot > tr > td {
         text-align: center !important;
     }
 </style>

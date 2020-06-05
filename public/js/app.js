@@ -1997,6 +1997,14 @@ function mergeFn (a, b) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_tables_2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-tables-2 */ "./node_modules/vue-tables-2/compiled/index.js");
 /* harmony import */ var vue_tables_2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_tables_2__WEBPACK_IMPORTED_MODULE_0__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2055,34 +2063,38 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   data: function data() {
+    var _options;
+
     return {
       processing: false,
       status: null,
       url: this.route,
-      columns: ['id', 'name', 'status', 'activate_deactivate'],
-      options: {
+
+      /*********************AÑADIMOS TEACHER A LAS COLUMNAS*********************/
+      columns: ['id', 'teacher', 'name', 'status', 'activate_deactivate'],
+      options: (_options = {
         filterByColumn: true,
         perPage: 10,
         perPageValues: [10, 25, 50, 100, 500],
+
+        /*********************AÑADIMOS TEACHER A LAS CABECERAS*********************/
         headings: {
           id: 'ID',
+          teacher: this.labels.teacher,
           name: this.labels.name,
           status: this.labels.status,
           activate_deactivate: this.labels.activate_deactivate,
           approve: this.labels.approve,
           reject: this.labels.reject
         },
-        customFilters: ['status'],
-        sortable: ['id', 'name', 'status'],
-        filterable: ['name'],
-        requestFunction: function requestFunction(data) {
-          return window.axios.get(this.url, {
-            params: data
-          })["catch"](function (e) {
-            this.dispatch('error', e);
-          }.bind(this));
-        }
-      }
+        customFilters: ['status']
+      }, _defineProperty(_options, "customFilters", ['status']), _defineProperty(_options, "sortable", ['id', 'teacher', 'name', 'status']), _defineProperty(_options, "filterable", ['name']), _defineProperty(_options, "requestFunction", function requestFunction(data) {
+        return window.axios.get(this.url, {
+          params: data
+        })["catch"](function (e) {
+          this.dispatch('error', e);
+        }.bind(this));
+      }), _options)
     };
   },
   methods: {
@@ -8840,7 +8852,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.table-bordered>thead>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>tfoot>tr>td {\n    text-align: center !important;\n}\n", ""]);
+exports.push([module.i, "\n.table-bordered > thead > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > tfoot > tr > td {\n    text-align: center !important;\n}\n", ""]);
 
 // exports
 
@@ -40983,6 +40995,14 @@ var render = function() {
           attrs: { columns: _vm.columns, url: _vm.url, options: _vm.options },
           scopedSlots: _vm._u([
             {
+              key: "teacher",
+              fn: function(props) {
+                return _c("div", {}, [
+                  _c("p", [_vm._v(_vm._s(props.row.teacher.title))])
+                ])
+              }
+            },
+            {
               key: "activate_deactivate",
               fn: function(props) {
                 return _c("div", {}, [
@@ -41041,6 +41061,7 @@ var render = function() {
           ])
         },
         [
+          _vm._v(" "),
           _vm._v(" "),
           _vm._v(" "),
           _c(

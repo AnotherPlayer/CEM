@@ -19,6 +19,8 @@ class TeacherController extends Controller
         return view('teachers.courses', compact('courses'));
     }
 
+
+
     public function students()
     {
         $students = Student::with('user', 'courses.reviews')

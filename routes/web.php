@@ -88,6 +88,7 @@ Route::group(['prefix' => "admin", "middleware" => ['auth', sprintf("role:%s", \
 
     Route::get('/students', 'AdminController@students')->name('admin.students');
     Route::get('/students_json', 'AdminController@studentsJson')->name('admin.students_json');
+
     Route::get('/teachers', 'AdminController@teachers')->name('admin.teachers');
     Route::get('/teachers_json', 'AdminController@teachersJson')->name('admin.teachers_json');
 });
