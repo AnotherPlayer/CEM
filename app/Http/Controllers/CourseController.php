@@ -77,7 +77,7 @@ class CourseController extends Controller
         $course = Course::with(['requirements', 'goals'])->withCount(['requirements', 'goals'])
             ->whereSlug($slug)->first();
         $btnText = __("Actualizar Curso");
-        return view('courses.form', compact('course', 'btnText'));
+        return view('courses.form_edit', compact('course', 'btnText'));
     }
 
     public function update(CourseRequest $course_request, Course $course)

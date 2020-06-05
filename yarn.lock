@@ -7041,10 +7041,10 @@ vue-style-loader@^4.1.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-tables-2@^2.0.27:
-  version "2.0.27"
-  resolved "https://registry.yarnpkg.com/vue-tables-2/-/vue-tables-2-2.0.27.tgz#ec5fdafcd7687914544c9bd048c27b5c8ce40352"
-  integrity sha512-IltVZ/bM/q+HE8gbMt0iooKpzcCsG16lZQdSDQuUnb6rwybWG7LB03DbtjMePjM632OlLLNXMSkbDm4/mOwI3w==
+vue-tables-2@^2.0.28:
+  version "2.0.28"
+  resolved "https://registry.yarnpkg.com/vue-tables-2/-/vue-tables-2-2.0.28.tgz#fe13145aafd0dd3e4a7cb80272fd61fa773ecb45"
+  integrity sha512-Qpg/QoBBWyBroVvKzAsFzfWN/LA58Ad0g5qrmm9FQRqBFCQ7V63Na4K4kH9fElGI778+YBWsWcohrDBFIJmpNg==
   dependencies:
     array-intersect "^0.0.1"
     babel-helper-vue-jsx-merge-props "^2.0.3"
