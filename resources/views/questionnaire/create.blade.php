@@ -21,14 +21,20 @@
                         <label for="title">Titulo del Cuestionario</label>
                         <input name="title" type="text" class="form-control" id="title" aria-describedby="titleHelp" placeholder="Titulo">
                         <small id="titleHelp" class="form-text text-muted">Ponle el nombre a tu cuestionario (generalmente el nombre de la materia)</small>
+                        @error('title')
+                            <small class="text-danger">{{ $message}}</small>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="purpose">Proposito del Cuestionario</label>
                         <input name="purpose" type="text" class="form-control" id="purpose" aria-describedby="purposeHelp" placeholder="Descripcion">
                         <small id="purposeHelp" class="form-text text-muted">Da una breve descripcion de que evaluara este cuestionario</small>
+                        @error('purpose')
+                            <small class="text-danger">{{ $message}}</small>
+                        @enderror
                     </div>
                     <div class="row justify-content-center">
-                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <button type="submit" class="btn btn-primary">Crear Cuestionario</button>
                     </div>
                 </form>
             </div>
