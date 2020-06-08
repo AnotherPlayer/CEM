@@ -16,7 +16,7 @@
             </div>
 
             <div class="card-body">
-
+            <a class="btn btn-dark" href="/questionnaires/{{ $questionnaire->id }}/questions/create">Agregar pregunta</a>
             </div>
         </div>
     </div>

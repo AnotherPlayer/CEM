@@ -97,3 +97,5 @@ Route::group(['prefix' => "admin", "middleware" => ['auth', sprintf("role:%s", \
 Route::get('/questionnaires/create','QuestionnaireController@create');
 Route::post('/questionnaires', 'QuestionnaireController@store');
 Route::get('/questionnaires/{questionnaire}', 'QuestionnaireController@show');
+Route::get('/questionnaires/{questionnaire}/questions/create', 'QuestionController@create');
+Route::post('/questionnaires/{questionnaire}/questions', 'QuestionController@store');
