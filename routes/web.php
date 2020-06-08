@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QuestionnaireController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -93,3 +94,5 @@ Route::group(['prefix' => "admin", "middleware" => ['auth', sprintf("role:%s", \
     Route::get('/teachers_json', 'AdminController@teachersJson')->name('admin.teachers_json');
 });
 
+Route::get('/questionnaires/create','QuestionnaireController@create');
+Route::post('/questionnaires', 'QuestionnaireController@store');
