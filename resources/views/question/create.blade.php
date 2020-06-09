@@ -38,6 +38,7 @@
                                     <input name="answers[][answer]" type="text" class="form-control"
                                     value ="{{ old('answers.0.answer')}}"
                                     id="answer1" aria-describedby="choicesHelp" placeholder="Escribe una respuesta">
+                                    <input type="checkbox" name="answers[0][correct]" value="1"> Respuesta Correcta</input>
 
                                     @error('answers.0.answer')
                                         <small class="text-danger">{{ $message}}</small>
@@ -51,6 +52,7 @@
                                     <input name="answers[][answer]" type="text" class="form-control"
                                     value ="{{ old('answers.1.answer')}}"
                                     id="answer2" aria-describedby="choicesHelp" placeholder="Escribe otra respuesta">
+                                    <input type="checkbox" name="answers[1][correct]" value="1"> Respuesta Correcta</input>
 
                                     @error('answers.1.answer')
                                         <small class="text-danger">{{ $message}}</small>
@@ -64,7 +66,7 @@
                                     <input name="answers[][answer]" type="text" class="form-control"
                                     value ="{{ old('answers.2.answer')}}"
                                     id="answer3" aria-describedby="choicesHelp" placeholder="Lo mismo de arriba">
-
+                                    <input type="checkbox" name="answers[2][correct]" value="1"> Respuesta Correcta</input>
                                     @error('answers.2.answer')
                                         <small class="text-danger">{{ $message}}</small>
                                     @enderror
@@ -77,7 +79,7 @@
                                     <input name="answers[][answer]" type="text" class="form-control"
                                     value ="{{ old('answers.3.answer')}}"
                                     id="answer4" aria-describedby="choicesHelp" placeholder="Otra respuesta">
-
+                                    <input type="checkbox" name="answers[3][correct]" value="1"> Respuesta Correcta</input>
                                     @error('answers.3.answer')
                                         <small class="text-danger">{{ $message}}</small>
                                     @enderror
