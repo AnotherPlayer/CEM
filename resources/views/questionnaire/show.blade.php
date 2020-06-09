@@ -17,6 +17,7 @@
 
             <div class="card-body">
                 <a class="btn btn-dark" href="/questionnaires/{{ $questionnaire->id }}/questions/create">Agregar pregunta</a>
+            <a class="btn btn-dark" href="/cuestionario/{{$questionnaire->id}}-{{Str::slug($questionnaire->title)}}">Tomar Cuestionario</a>
             </div>
         </div>
         @foreach($questionnaire->questions as $question)
