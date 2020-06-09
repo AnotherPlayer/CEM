@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('role_id')->default(\App\Role::STUDENT);
-            $table->foreign('role_id')->references('id')->on('roles');
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->string('name');
             $table->string('last_name')->nullable();
             $table->string('slug');
@@ -44,7 +44,7 @@ class CreateUsersTable extends Migration
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('name');
             $table->string('stripe_id');
             $table->string('stripe_plan');
@@ -58,7 +58,7 @@ class CreateUsersTable extends Migration
         {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('provider');
             $table->string('provider_uid');
         });
