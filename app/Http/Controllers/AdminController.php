@@ -9,15 +9,18 @@ use App\Teacher;
 use App\User;
 use App\VueTables\EloquentVueTables;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    public function courses () {
+    public function courses()
+    {
         return view('admin.courses');
     }
 
-    public function coursesJson () {
-        if(request()->ajax()) {
+    public function coursesJson()
+    {
+        if (request()->ajax()) {
             $vueTables = new EloquentVueTables;
             /*************************************OBTENEMOS LA FK Y LA RELACIÓN*************************************/
             $data = $vueTables->get(new Course, ['courses.id', 'name', 'status', 'teacher_id'], ['teacher']);
@@ -26,22 +29,23 @@ class AdminController extends Controller
         return abort(401);
     }
 
-    public function updateCourseStatus () {
+    public function updateCourseStatus()
+    {
         if (\request()->ajax()) {
             $course = Course::find(\request('courseId'));
 
-            if(
-                (int) $course->status !== Course::PUBLISHED &&
-                ! $course->previous_approved &&
+            if (
+                (int)$course->status !== Course::PUBLISHED &&
+                !$course->previous_approved &&
                 \request('status') === Course::PUBLISHED
             ) {
                 $course->previous_approved = true;
 
             }
 
-            if(
-                (int) $course->status !== Course::REJECTED &&
-                ! $course->previous_rejected &&
+            if (
+                (int)$course->status !== Course::REJECTED &&
+                !$course->previous_rejected &&
                 \request('status') === Course::REJECTED
             ) {
                 $course->previous_rejected = true;
@@ -55,22 +59,35 @@ class AdminController extends Controller
         return abort(401);
     }
 
-    public function students () {
-        return view('admin.students');
+    public function students()
+    {
+        $students =  User::orderBy('name', 'ASC')->where("role_id","=",3)->select("id","name",'email')->paginate(10);
+
+        return view('admin.students', compact('students'));
     }
 
-    public function teachers () {
-        $person = User::pluck('name', 'role_id');
-        $teachers = Course::paginate();
-        return view('admin.teachers', compact('teachers','person'));
-    }
-    public function destroy(Course $course)
+    public function destroy_student($id)
     {
-        try {
-            $course->delete();
-            return back()->with('message', ['success', __("Curso eliminado correctamente")]);
-        } catch (\Exception $exception) {
-            return back()->with('message', ['danger', __("Error eliminando el curso")]);
-        }
+        User::destroy($id);
+
+        return back()->with('message', ['success', __('Estudiante eliminado con Éxito')]);
     }
+
+    public function teachers()
+    {
+
+        $teachers =  User::orderBy('name', 'ASC')->where("role_id","=",2)->select("id","name",'email')->paginate(10);
+        return view('admin.teachers', compact('teachers'));
+    }
+
+    public function destroy_teacher($id)
+    {
+
+        User::destroy($id);
+
+        return back()->with('message', ['success', __('Asesor eliminado con Éxito')]);
+
+    }
+
+
 }
