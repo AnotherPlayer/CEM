@@ -26,7 +26,14 @@
                 <ul class="list-group">
                     @foreach ($questionnaires as $questionnaire)
                         <li class="list-group-item">
-                            <a href="/questionnaires/{{ $questionnaire->id}}">{{ $questionnaire->title}}</a>
+                            <a href="{{ $questionnaire->path()}}">{{ $questionnaire->title}}</a>
+
+                            <div class="mt-2">
+                                <small class="font-weight-bold">Compartir Cuestionario</small>
+                                <p>
+                                    <a href="{{ $questionnaire->publicPath()}}">{{ $questionnaire->publicPath()}}</a>
+                                </p>
+                            </div>
                         </li>
                     @endforeach
                 </ul>
