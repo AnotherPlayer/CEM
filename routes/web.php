@@ -101,11 +101,12 @@ Route::group(['prefix' => "admin", "middleware" => ['auth', sprintf("role:%s", \
 });
 
 //Estos deben ser solo de maestros/admin
-Route::get('/questionnaires/create','QuestionnaireController@create')->name('teacher.crear_cuestionario');
+Route::get('/questionnaires/create','QuestionnaireController@create');
 Route::post('/questionnaires', 'QuestionnaireController@store');
 Route::get('/questionnaires/{questionnaire}', 'QuestionnaireController@show');
 Route::get('/questionnaires/{questionnaire}/questions/create', 'QuestionController@create');
 Route::post('/questionnaires/{questionnaire}/questions', 'QuestionController@store');
+Route::get('/questionnaires/', 'QuestionnaireController@list')->name('teacher.cuestionarios');
 
 //solo los alumnos pueden tomar los cuestionarios
 Route::get('/cuestionario/{questionnaire}-{slug}', 'CuestionarioController@show');

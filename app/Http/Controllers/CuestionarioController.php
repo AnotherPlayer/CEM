@@ -18,6 +18,7 @@ class CuestionarioController extends Controller
         ]);
 
         $user = auth()->user();
+        // La habia regado aqui xd ya debe jalar para el mismo usuario.
         $userdata = array(
             "user_id" => $user->id,
             "name" => $user->name

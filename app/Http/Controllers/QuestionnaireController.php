@@ -35,4 +35,9 @@ class QuestionnaireController extends Controller
 
         return view('questionnaire.show', compact('questionnaire'));
     }
+
+    public function list(){
+       $questionnaires = auth()->user()->questionnaires;
+       return view('questionnaire.index', compact('questionnaires'));
+    }
 }
