@@ -20,8 +20,9 @@ class CoursePolicy
         return $user->role_id !== Role::ADMIN && ! $user->subscribed('main');
     }
 
+    // Modifique esto aqui por que si yo, maestro, creo un curso y le doy detalles me manda alv.
     public function inscribe (User $user, Course $course) {
-        return ! $course->students->contains($user->student->id);
+        return ! $course->students->contains($user->id);
     }
 
     public function review (User $user, Course $course) {

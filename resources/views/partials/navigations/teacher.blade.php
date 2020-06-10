@@ -4,4 +4,5 @@
 <li><a class="nav-link" href="{{route('courses.subscribed')}}">{{ __("Mis Cursos") }}</a></li>
 <li><a class="nav-link" href="{{route('teacher.courses')}}">{{ __("Cursos desarrollados por mí") }}</a></li>
 <li><a class="nav-link" href="{{route('courses.create')}}">{{ __("Crear curso") }}</a></li>
+<li><a class="nav-link" href="{{route('teacher.crear_cuestionario')}}">{{ __("Crear cuestionario") }}</a></li>
 @include('partials.navigations.logged')

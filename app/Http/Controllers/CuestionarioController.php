@@ -19,7 +19,7 @@ class CuestionarioController extends Controller
 
         $user = auth()->user();
         $userdata = array(
-            "id" => $user->id,
+            "user_id" => $user->id,
             "name" => $user->name
         );
         $survey = $questionnaire->cuestionarios()->create($userdata);
