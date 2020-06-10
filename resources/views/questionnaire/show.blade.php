@@ -29,7 +29,11 @@
                 <div class="card-body">
                     <ul class="list-group">
                         @foreach($question->answers as $answer)
-                            <li class="list-group-item">{{ $answer->answer}}</li>
+                            @if ($answer->correct == 1)
+                                <li class="list-group-item list-group-item-success">{{ $answer->answer}}</li>
+                            @else
+                                <li class="list-group-item">{{ $answer->answer}}</li>
+                            @endif
                         @endforeach
                     </ul>
                 </div>
