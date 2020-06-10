@@ -11,7 +11,7 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <h1>{{$questionnaire->title}}</h1>
-        <form action="#" method="post">
+    <form action="/cuestionario/{{ $questionnaire->id}}-{{Str::slug($questionnaire->title) }}" method="post">
             @csrf
             @foreach($questionnaire->questions as $key => $question)
                 <div class="card">
@@ -22,12 +22,18 @@
                     <div class="card-body">
                         <ul class="list-group">
                             @foreach($question->answers as $answer)
-                                <li class="list-group-item">{{ $answer->answer}}</li>
+                                <label for="answer{{ $answer->id}}">
+                                    <li class="list-group-item">
+                                        <input type="radio" name="responses[{{$key}}][answer_id]" id="answer{{ $answer->id}}"
+                                        class="mr-2" value="{{ $answer->id}}">{{$answer->answer}}</input>
+                                    </li>
+                                </label>
                             @endforeach
                         </ul>
                     </div>
                 </div>
             @endforeach
+            <button class="btn btn-dark" type="submit">Enviar respuestas</button>
         </form>
     </div>
 </div>

@@ -10,4 +10,8 @@ class CuestionarioController extends Controller
         $questionnaire->load('questions.answers');
         return view('cuestionario.show', compact('questionnaire'));
     }
+
+    public function store(){
+        dd(request()->all());
+    }
 }
