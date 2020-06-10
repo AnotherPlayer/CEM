@@ -16,17 +16,10 @@
 - Al terminar escribe: php artisan key:generate
 - Para iniciar usa php artisan serve
 - Para crear las migraciones con los seeders(datos de prueba), ejecuten php artisan migrate --seed
-- Se anexó la base de datos cursos_map.sql
 - Las credenciales son admin_cem@gmail.com   student@gmail.com   teacher_cem@gmail.com, todos llevan la misma contraseña : "password"
-<<<<<<< HEAD
-- Se necesita hacer un php artisan migrate para crear las tablas de los cuestionarios.
-=======
-
-- Para crear las migraciones con los seeders(datos de prueba), ejecuten php artisan migrate --seed
-- Las credenciales son admin_cem@gmail.com   student@gmail.com   teacher_cem@gmail.com, todos llevan la misma contraseña : "password"
+- Se necesita hacer un php artisan migrate para crear las tablas de los cuestionarios. <- no necesario si usas el de migrate --seed
 
 Porfavor, crea tu branch.
->>>>>>> ecc21123c08a959b8285f291b7bc41464b5548cd
 
 
 ## About Laravel
