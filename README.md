@@ -18,11 +18,6 @@
 - Para crear las migraciones con los seeders(datos de prueba), ejecuten php artisan migrate --seed
 - Se anexó la base de datos cursos_map.sql
 - Las credenciales son admin_cem@gmail.com   student@gmail.com   teacher_cem@gmail.com, todos llevan la misma contraseña : "password"
-
-- Para crear las migraciones con los seeders(datos de prueba), ejecuten php artisan migrate --seed
-- Se anexó la base de datos cursos_map.sql
-- Las credenciales son admin_cem@gmail.com   student@gmail.com   teacher_cem@gmail.com, todos llevan la misma contraseña : "password"
-
 - Se necesita hacer un php artisan migrate para crear las tablas de los cuestionarios.
 
 
