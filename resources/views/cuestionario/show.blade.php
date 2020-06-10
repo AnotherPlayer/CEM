@@ -20,12 +20,20 @@
                     </div>
 
                     <div class="card-body">
+
+                        @error('responses.' . $key . '.answer_id')
+                        <small class="text-danger">Necesitas contestar esta pregunta</small>
+                        @enderror
+
                         <ul class="list-group">
                             @foreach($question->answers as $answer)
                                 <label for="answer{{ $answer->id}}">
                                     <li class="list-group-item">
                                         <input type="radio" name="responses[{{$key}}][answer_id]" id="answer{{ $answer->id}}"
+                                        {{(old('responses.' . $key . '.answer_id') == $answer->id ? 'checked' : '' )}}
                                         class="mr-2" value="{{ $answer->id}}">{{$answer->answer}}</input>
+                                        {{-- El input oculto es para poder ver a que pregunta corresponde la respuesta --}}
+                                    <input type="hidden" name="responses[{{$key}}][question_id]" value="{{ $question->id}}"></input>
                                     </li>
                                 </label>
                             @endforeach

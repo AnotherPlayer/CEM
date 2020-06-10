@@ -11,7 +11,21 @@ class CuestionarioController extends Controller
         return view('cuestionario.show', compact('questionnaire'));
     }
 
-    public function store(){
-        dd(request()->all());
+    public function store(\App\Questionnaire $questionnaire){
+        $data = request()->validate([
+            'responses.*.answer_id' => 'required',
+            'responses.*.question_id' => 'required'
+        ]);
+
+        $user = auth()->user();
+        $userdata = array(
+            "id" => $user->id,
+            "name" => $user->name
+        );
+        $survey = $questionnaire->cuestionarios()->create($userdata);
+        $survey->respuestas()->createMany($data['responses']);
+
+        // Aun no hay vista. calma :v
+        return 'Gracias';
     }
 }
