@@ -7,12 +7,17 @@
     ])
 @endsection
 
+$suma = 0;
+
 @section('content')
 <div class="row justify-content-center">
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                {{ $questionnaire->title }}
+                <li class="d-flex justify-content-between">
+                    <div>{{ $questionnaire->title }}</div>
+                    {{-- Aqui ira otra cosa algun dia :v --}}
+                </li>
             </div>
 
             <div class="card-body">
@@ -30,9 +35,15 @@
                     <ul class="list-group">
                         @foreach($question->answers as $answer)
                             @if ($answer->correct == 1)
-                                <li class="list-group-item list-group-item-success">{{ $answer->answer}}</li>
+                                <li class="list-group-item d-flex justify-content-between list-group-item-success">
+                                    <div>{{ $answer->answer}}</div>
+                                    <div>{{ intval(($answer->respuestas->count() * 100) / $question->respuestas->count())}}%</div>
+                                </li>
                             @else
-                                <li class="list-group-item">{{ $answer->answer}}</li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <div>{{ $answer->answer}}</div>
+                                <div>{{ intval(($answer->respuestas->count() * 100) / $question->respuestas->count())}}%</div>
+                            </li>
                             @endif
                         @endforeach
                     </ul>
