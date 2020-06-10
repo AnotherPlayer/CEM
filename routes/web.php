@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QuestionnaireController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -78,7 +79,6 @@ Route::group(['prefix' => "teacher", "middleware" => ["auth"]], function () {
     Route::get('/courses', 'TeacherController@courses')->name('teacher.courses');
     Route::get('/students', 'TeacherController@students')->name('teacher.students');
     Route::post('/send_message_to_student', 'TeacherController@sendMessageToStudent')->name('teacher.send_message_to_student');
-
 });
 
 Route::group(['prefix' => "admin", "middleware" => ['auth', sprintf("role:%s", \App\Role::ADMIN)]], function() {
@@ -100,3 +100,15 @@ Route::group(['prefix' => "admin", "middleware" => ['auth', sprintf("role:%s", \
 
 });
 
+//Estos deben ser solo de maestros/admin
+Route::get('/questionnaires/create','QuestionnaireController@create');
+Route::post('/questionnaires', 'QuestionnaireController@store');
+Route::get('/questionnaires/{questionnaire}', 'QuestionnaireController@show');
+Route::get('/questionnaires/{questionnaire}/questions/create', 'QuestionController@create');
+Route::post('/questionnaires/{questionnaire}/questions', 'QuestionController@store');
+Route::delete('/questionnaires/{questionnaire}/questions/{question}', 'QuestionController@destroy');
+Route::get('/questionnaires/', 'QuestionnaireController@list')->name('teacher.cuestionarios');
+
+//solo los alumnos pueden tomar los cuestionarios
+Route::get('/cuestionario/{questionnaire}-{slug}', 'CuestionarioController@show');
+Route::post('/cuestionario/{questionnaire}-{slug}', 'CuestionarioController@store');

@@ -101,4 +101,8 @@ class User extends Authenticatable
     public function socialAccount () {
         return $this->hasOne(UserSocialAccount::class);
     }
+
+    public function questionnaires(){
+        return $this->hasMany(\App\Questionnaire::class);
+    }
 }
