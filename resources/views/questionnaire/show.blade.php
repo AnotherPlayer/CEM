@@ -37,12 +37,20 @@ $suma = 0;
                             @if ($answer->correct == 1)
                                 <li class="list-group-item d-flex justify-content-between list-group-item-success">
                                     <div>{{ $answer->answer}}</div>
-                                    <div>{{ intval(($answer->respuestas->count() * 100) / $question->respuestas->count())}}%</div>
+                                    @if($answer->respuestas->count() != null)
+                                        <div>{{ intval(($answer->respuestas->count() * 100) / $question->respuestas->count())}}%</div>
+                                    @else
+                                        <div>0%</div>
+                                    @endif
                                 </li>
                             @else
                             <li class="list-group-item d-flex justify-content-between">
                                 <div>{{ $answer->answer}}</div>
-                                <div>{{ intval(($answer->respuestas->count() * 100) / $question->respuestas->count())}}%</div>
+                                @if($answer->respuestas->count() != null)
+                                        <div>{{ intval(($answer->respuestas->count() * 100) / $question->respuestas->count())}}%</div>
+                                    @else
+                                        <div>0%</div>
+                                    @endif
                             </li>
                             @endif
                         @endforeach
