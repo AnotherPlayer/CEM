@@ -93,6 +93,12 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="yt" class="col-md-4 col-form-label text-md-right"> {{__("URL a la Playlist")}}</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="yt" name="youtube_url">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-8">

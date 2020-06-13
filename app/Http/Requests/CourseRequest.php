@@ -43,6 +43,7 @@ class CourseRequest extends FormRequest
                     ],
                     'picture' => 'required|image|mimes:jpg,jpeg,png',
                     'requirements.0' => 'required_with:requirements.1',
+                    'youtube_url' => 'required',
                     'goals.0' => 'required_with:goals.1'
                 ];
             case 'PUT':
@@ -60,6 +61,7 @@ class CourseRequest extends FormRequest
                     ],
                     'picture' => 'sometimes|image|mimes:jpg,jpeg,png',
                     'requirements.0' => 'required_with:requirements.1',
+                    'youtube_url' => 'required',
                     'goals.0' => 'required_with:goals.1',
                 ];
             }

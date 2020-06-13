@@ -6,6 +6,7 @@ use App\Course;
 use App\Helper\Helper;
 use App\Http\Requests\CourseRequest;
 use App\Mail\NewStudentInCourse;
+use App\Playlist;
 use App\Review;
 use Illuminate\Http\Request;
 
@@ -64,10 +65,14 @@ class CourseController extends Controller
 
     public function store(CourseRequest $course_request)
     {
+        $yt = request()->input('youtube_url');
+        $embed = str_replace('watch?v=','embed/',$yt);
+
         $picture = Helper::uploadFile('picture', 'courses');
         $course_request->merge(['picture' => $picture]);
         $course_request->merge(['teacher_id' => auth()->user()->teacher->id]);
         $course_request->merge(['status' => Course::PENDING]);
+        $course_request->merge(['youtube_url' => $embed]);
         Course::create($course_request->input());
         return back()->with('message', ['success', __("Curso enviado de manera correcta, pendiente de aprobación")]);
     }

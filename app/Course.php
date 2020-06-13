@@ -51,7 +51,7 @@ class Course extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['teacher_id', 'name', 'description', 'picture', 'level_id', 'category_id', 'status'];
+    protected $fillable = ['teacher_id', 'name', 'description', 'picture', 'level_id', 'category_id', 'status', 'youtube_url'];
 
     const PUBLISHED = 1;
     const PENDING = 2;
@@ -114,6 +114,10 @@ class Course extends Model
     public function goals()
     {
         return $this->hasMany(Goal::class)->select('id', 'course_id', 'goal');
+    }
+
+    public function playlist(){
+        return $this->hasOne(Playlist::class)->select('id','course_id','youtube_url');
     }
 
     public function level()
