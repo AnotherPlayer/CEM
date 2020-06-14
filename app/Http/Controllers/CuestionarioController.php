@@ -23,10 +23,16 @@ class CuestionarioController extends Controller
             "user_id" => $user->id,
             "name" => $user->name
         );
-        $survey = $questionnaire->cuestionarios()->create($userdata);
-        $survey->respuestas()->createMany($data['responses']);
+
+        if($data == null){
+            return 'No se puede contestar este cuestionario.';
+        }else{
+            $survey = $questionnaire->cuestionarios()->create($userdata);
+            $survey->respuestas()->createMany($data['responses']);
+            return back();
+        }
 
         // Aun no hay vista. calma :v
-        return 'Gracias';
+        //return 'Gracias';
     }
 }
