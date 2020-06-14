@@ -8,7 +8,7 @@ class SubscriptionController extends Controller
 {
     public function __construct() {
         $this->middleware(function($request, $next) {
-            if ( auth()->user()->subscribed('main') ) {
+            if ( auth()->user()->subscribed('year') ) {
                 return redirect('/')
                     ->with('message', ['warning', __("Actualmente ya estás suscrito a otro plan")]);
             }
@@ -25,11 +25,11 @@ class SubscriptionController extends Controller
         $token = request('stripeToken');
         try {
             if ( \request()->has('coupon')) {
-                \request()->user()->newSubscription('primary', 'prod_HKNc0Y6Pi0Ao8A')
+                \request()->user()->newSubscription('year', 'price_1GtUP2KrVsqefywTjYGLkq5s')
                     ->withCoupon(\request('coupon'))->create($token);
             } else {
-                \request()->user()->newSubscription('primary', 'prod_HITW0SJtMy4E6S')
-                    ->create($token);
+                \request()->user()->newSubscription('year', 'price_1GtUP2KrVsqefywTjYGLkq5s')
+                    ->withCoupon(\request('coupon'))->create($token);
             }
             return redirect(route('subscriptions.admin'))
                 ->with('message', ['success', __("Se ha suscrito correctamente")]);
@@ -37,6 +37,12 @@ class SubscriptionController extends Controller
             $error = $exception->getMessage();
             return back()->with('message', ['danger', $error]);
         }
+
+    }
+
+    public function admin () {
+        $subscriptions = auth()->user()->subscriptions;
+        return view('subscriptions.admin', compact('subscriptions'));
     }
 
 }
