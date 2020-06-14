@@ -12,23 +12,23 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                {{__("Creacion de un nuevo cuestionario")}}
+                {{__("Creación de un nuevo cuestionario")}}
             </div>
             <div class="card-body">
                 <form action="/questionnaires" method="post">
                     @csrf
                     <div class="form-group">
-                        <label for="title">Titulo del Cuestionario</label>
-                        <input name="title" type="text" class="form-control" id="title" aria-describedby="titleHelp" placeholder="Titulo">
-                        <small id="titleHelp" class="form-text text-muted">Ponle el nombre a tu cuestionario (generalmente el nombre de la materia)</small>
+                        <label for="title">Título del Cuestionario</label>
+                        <input name="title" type="text" class="form-control" id="title" aria-describedby="titleHelp" placeholder="Titulo" required>
+                        <small id="titleHelp" class="form-text text-muted">Ingrese el nombre al cuestionario (generalmente el nombre de la materia)</small>
                         @error('title')
                             <small class="text-danger">{{ $message}}</small>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="purpose">Proposito del Cuestionario</label>
-                        <input name="purpose" type="text" class="form-control" id="purpose" aria-describedby="purposeHelp" placeholder="Descripcion">
-                        <small id="purposeHelp" class="form-text text-muted">Da una breve descripcion de que evaluara este cuestionario</small>
+                        <label for="purpose">Propósito del Cuestionario</label>
+                        <input name="purpose" type="text" class="form-control" id="purpose" aria-describedby="purposeHelp" placeholder="Descripción">
+                        <small id="purposeHelp" class="form-text text-muted">Da una breve descripción de que evaluará este cuestionario</small>
                         @error('purpose')
                             <small class="text-danger">{{ $message}}</small>
                         @enderror

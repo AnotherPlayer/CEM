@@ -12,7 +12,7 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-               Panel de Administracion de Cuestionarios
+               Panel de Administración de Cuestionarios
             </div>
             <div class="card-body">
                 <a href="/questionnaires/create" class="btn btn-dark">Crear cuestionario</a>

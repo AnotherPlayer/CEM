@@ -17,7 +17,7 @@
             <div class="plan col-sm-4 col-lg-4">
                 <div class="plan-name-bronze">
                     <h2>{{ __("MENSUAL") }}</h2>
-                    <span>{{ __(":price / Mes", ['price' => '$ 5,99']) }}</span>
+                    <span>{{ __(":price / Mes", ['price' => '$ 99,00']) }}</span>
                 </div>
                 <ul>
                     <li class="plan-feature">{{ __("Acceso a todos los cursos") }}</li>
@@ -26,9 +26,9 @@
                         @include('partials.stripe.form', [
                             "product" => [
                                 "name" => __("Suscripción"),
-                                "description" => __("monthly"),
+                                "description" => __("MENSUAL"),
                                 "type" => "monthly",
-                                "amount" => 599,99
+                                "amount" => 999,99
                             ]
                         ])
                     </li>
@@ -38,7 +38,7 @@
             <div class="plan col-sm-4 col-lg-4">
                 <div class="plan-name-silver">
                     <h2>{{ __("Trimestral") }}</h2>
-                    <span>{{ __(":price / 3 meses", ['price' => '$ 12,99']) }}</span>
+                    <span>{{ __(":price / 3 meses", ['price' => '$ 249,00']) }}</span>
                 </div>
                 <ul>
                     <li class="plan-feature">{{ __("Acceso a todos los cursos") }}</li>
@@ -47,8 +47,9 @@
                         @include('partials.stripe.form',
                             ["product" => [
                                 'name' => 'Suscripción',
-                                'description' => 'Trimestral',
-                                'type' => 'quarterly',
+                                'description' => 'TRIMESTRAL',
+                                'type' => 'monthly',
+
                                 'amount' => 1299.99
                             ]]
                         )
@@ -59,7 +60,7 @@
             <div class="plan col-sm-4 col-lg-4">
                 <div class="plan-name-gold">
                     <h2>{{ __("ANUAL") }}</h2>
-                    <span>{{ __(":price / 12 meses", ['price' => '$ 34,99']) }}</span>
+                    <span>{{ __(":price / 12 meses", ['price' => '$ 899,00']) }}</span>
                 </div>
                 <ul>
                     <li class="plan-feature">{{ __("Acceso a todos los cursos") }}</li>
@@ -68,8 +69,9 @@
                         @include('partials.stripe.form',
                             ["product" => [
                                 'name' => 'Suscripción',
-                                'description' => 'Anual',
-                                'type' => 'yearly',
+                                'description' => 'ANUAL',
+                                'type' => 'year',
+                                'interval'=> 'year',
                                 'amount' => 3499.99
                             ]]
                         )

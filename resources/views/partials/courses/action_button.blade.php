@@ -1,31 +1,29 @@
 <div class="col-2">
     @auth
         @can('opt_for_course', $course)
-            @can('subscribe', \App\Course::class)
-                <a class="btn btn-subscribe btn-bottom btn-block"
-                   href="{{ route('courses.inscribe',  $course->slug) }} {{-- route('subscriptions.plans') --}}">
-                     {{ __("Subscribirme") }}
+            @can('subscribe', $course)
+                <a class="btn btn-subscribe btn-bottom btn-block" href="{{route('courses.inscribe',$course->slug )}}">
+                    <i class="fa fa-bolt"></i> {{ __("Comprar") }}
                 </a>
             @else
                 @can('inscribe', $course)
-                    <a class="btn btn-subscribe btn-bottom btn-block"
-                       href="{{ route('courses.inscribe',  $course->slug) }}">
-                       {{ __("Inscribirme") }}
+                    <a class="btn btn-subscribe btn-bottom btn-block" href="{{route('courses.inscribe' ,$course->slug)}}">
+                        <i class="fa fa-bolt"></i> {{ __("Adquirir") }}
                     </a>
                 @else
                     <a class="btn btn-subscribe btn-bottom btn-block" href="#">
-                         {{ __("Inscrito") }}
+                        <i class="fa fa-bolt"></i> {{ __("Adquirido") }}
                     </a>
                 @endcan
             @endcan
         @else
             <a class="btn btn-subscribe btn-bottom btn-block" href="#">
-              {{ __("Soy autor") }}
+                <i class="fa fa-user"></i> {{ __("Soy autor") }}
             </a>
         @endcan
     @else
         <a class="btn btn-subscribe btn-bottom btn-block" href="{{ route('login') }}">
-            {{ __("Acceder") }}
+            <i class="fa fa-user"></i> {{ __("Acceder") }}
         </a>
     @endauth
 </div>

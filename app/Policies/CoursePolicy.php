@@ -13,12 +13,13 @@ class CoursePolicy
 
 
     public function opt_for_course (User $user, Course $course) {
-        return ! $user->teacher || $user->teacher->id !== $course->teacher_id;
+        return  ! $user->teacher || $user->teacher->id !== $course->teacher_id;
     }
 
-    public function subscribe (User $user) {
-        return $user->role_id !== Role::ADMIN && ! $user->subscribed('main');
+    public function subscribe (User $user, Course $course) {
+        return $user->role_id !== Role::ADMIN ;
     }
+
 
     // Modifique esto aqui por que si yo, maestro, creo un curso y le doy detalles me manda alv.
     public function inscribe (User $user, Course $course) {

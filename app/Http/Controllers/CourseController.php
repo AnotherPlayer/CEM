@@ -42,6 +42,8 @@ class CourseController extends Controller
         return back()->with('message', ['success', __("Inscrito correctamente al curso")]);
     }
 
+
+
     public function subscribed()
     {
         $courses = Course::whereHas('students', function ($query) {
@@ -50,6 +52,7 @@ class CourseController extends Controller
         return view('courses.subscribed', compact('courses'));
 
     }
+
 
     public function addReview()
     {

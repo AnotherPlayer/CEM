@@ -39,8 +39,13 @@ Route::group(['prefix' => 'courses'], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::get('/subscribed', 'CourseController@subscribed')
             ->name('courses.subscribed');
+
+
         Route::get('/{course}/inscribe', 'CourseController@inscribe')
             ->name('courses.inscribe');
+
+
+
         Route::post('/add_review', 'CourseController@addReview')
             ->name('courses.add_review');
 
@@ -59,9 +64,25 @@ Route::group(['prefix' => 'courses'], function () {
     Route::get('/{course}', 'CourseController@show')->name('courses.detail');
 });
 
+//PAYPAL
+
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/{course}/inscribe_paypal', 'PaypalController@inscribe_paypal')
+        ->name('paypal.inscribe_paypal');
+
+    Route::get('/{course}/pay_paypal', 'PaypalController@payWithPayPal')->name('paypal.pay_paypal');
+    Route::get('/paypal/status', 'PaypalController@payPalStatus')->name('paypal.status');
+
+    Route::get('/paypal/fail', 'PaypalController@payPalFail')->name('paypal.fail');
+
+});
+
 Route::group(["prefix" => "subscriptions"], function () {
     Route::get('/plans', 'SubscriptionController@plans')
         ->name('subscriptions.plans');
+    Route::get('/admin', 'SubscriptionController@admin')
+        ->name('subscriptions.admin');
     Route::post('/process_subscription', 'SubscriptionController@processSubscription')
         ->name('subscriptions.process_subscription');
 });
