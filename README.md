@@ -18,6 +18,8 @@
 - Para crear las migraciones con los seeders(datos de prueba), ejecuten php artisan migrate --seed
 - Las credenciales son admin_cem@gmail.com   student@gmail.com   teacher_cem@gmail.com, todos llevan la misma contraseña : "password"
 - Se necesita hacer un php artisan migrate para crear las tablas de los cuestionarios. <- no necesario si usas el de migrate --seed
+- https://developer.paypal.com/classic-home/
+- cem.asesorias2020@gmail.com     P@ssword2020
 
 Porfavor, crea tu branch.
 
