@@ -19,7 +19,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="title">Título del Cuestionario</label>
-                        <input name="title" type="text" class="form-control" id="title" aria-describedby="titleHelp" placeholder="Titulo">
+                        <input name="title" type="text" class="form-control" id="title" aria-describedby="titleHelp" placeholder="Titulo" required>
                         <small id="titleHelp" class="form-text text-muted">Ingrese el nombre al cuestionario (generalmente el nombre de la materia)</small>
                         @error('title')
                             <small class="text-danger">{{ $message}}</small>

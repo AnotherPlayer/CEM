@@ -88,8 +88,7 @@ class PaypalController extends Controller
         $paymentId = $request->input('paymentId');
         $token = $request->input('token');
         $payerId = $request->input('PayerID');
-        $course = $request->input('slug');
-        dd($again);
+
 
 
 

@@ -2,7 +2,7 @@
     @auth
         @can('opt_for_course', $course)
             @can('subscribe', $course)
-                <a class="btn btn-subscribe btn-bottom btn-block" href="{{route('paypal.pay_paypal' )}}">
+                <a class="btn btn-subscribe btn-bottom btn-block" href="{{route('courses.inscribe',$course->slug )}}">
                     <i class="fa fa-bolt"></i> {{ __("Comprar") }}
                 </a>
             @else
