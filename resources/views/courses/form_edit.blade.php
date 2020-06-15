@@ -103,7 +103,7 @@
                         <div class="form-group row">
                             <label for="ytplaylist" class="col-md-4 col-form-label text-md-right"> {{__("URL a la Playlist")}}</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="ytplaylist" name="ytplaylist" value={{ old('youtube_url') ?: $course->youtube_url}}>
+                                <input type="text" class="form-control" id="yt" name="youtube_url"  value=" {{old('youtube_url') ?: $course->youtube_url}}" />
                             </div>
                         </div>
                     </div>

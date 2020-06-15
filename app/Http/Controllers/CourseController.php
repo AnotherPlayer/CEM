@@ -69,7 +69,7 @@ class CourseController extends Controller
     public function store(CourseRequest $course_request)
     {
         $yt = request()->input('youtube_url');
-        $embed = str_replace('watch?v=','embed/',$yt);
+        $embed = str_replace('playlist?','embed/videoseries?',$yt);
 
         $picture = Helper::uploadFile('picture', 'courses');
         $course_request->merge(['picture' => $picture]);
@@ -85,7 +85,7 @@ class CourseController extends Controller
         $course = Course::with(['requirements', 'goals'])->withCount(['requirements', 'goals'])
             ->whereSlug($slug)->first();
         $btnText = __("Actualizar Curso");
-        return view('courses.form_edit', compact('course', 'btnText'));
+        return view('courses.form', compact('course', 'btnText'));
     }
 
     public function update(CourseRequest $course_request, Course $course)
@@ -96,7 +96,7 @@ class CourseController extends Controller
             $course_request->merge(['picture' => $picture]);
         }
         $course->fill($course_request->input())->save();
-        return back()->with('message', ['success', __('Curso Actualizado con Éxito')]);
+        return redirect("/courses/$course->slug/edit")->with('message', ['success', __("¡Curso actualizado!")]);
     }
 
 

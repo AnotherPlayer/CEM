@@ -3,6 +3,10 @@
         class="card-img-top"
         src="{{ $course->pathAttachment() }}"
         alt="{{ $course->name }}"
+        height="200 px
+"
+
+
     />
     <div class="card-body">
         <span class="badge-box"></span>

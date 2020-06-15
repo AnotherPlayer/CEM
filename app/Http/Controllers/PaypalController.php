@@ -37,7 +37,7 @@ class PaypalController extends Controller
     public function payWithPaypal(Course $course)
     {
 
-        dd($course);
+        //dd($course);
 
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
@@ -106,7 +106,7 @@ class PaypalController extends Controller
         //dd($result);
 
         if($result->getState() === 'approved'){
-            //Ejecución de la inscripción al curso
+            return view('welcome');
 
         }
 
@@ -117,6 +117,10 @@ class PaypalController extends Controller
 
     public function payPalFail(){
         return view('paypal.fail');
+    }
+
+    public function execute(){
+        return \request('paymentId');
     }
 
     public function inscribe_paypal(Course $course)

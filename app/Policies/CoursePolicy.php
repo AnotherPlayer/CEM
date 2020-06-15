@@ -16,8 +16,8 @@ class CoursePolicy
         return  ! $user->teacher || $user->teacher->id !== $course->teacher_id;
     }
 
-    public function subscribe (User $user, Course $course) {
-        return $user->role_id !== Role::ADMIN ;
+    public function subscribe (User $user) {
+        return $user->role_id !== Role::ADMIN && ! $user->subscribed('main');
     }
 
 

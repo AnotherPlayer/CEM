@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\QuestionnaireController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -23,6 +24,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/send-mail',function (){
+   $details =[
+       'title' => 'Mail from CEM',
+       'body'=>"Esta es una prueba de envios de correo"
+   ];
+   Mail::to('lv428694@gmail.com')->send(new App\Mail\TestMail($details));
+   echo "Email ha sido enviado";
+});
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
@@ -76,6 +85,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/paypal/fail', 'PaypalController@payPalFail')->name('paypal.fail');
 
+    Route::get('/execute-payment','PaypalController@execute');
+
 });
 
 Route::group(["prefix" => "subscriptions"], function () {
@@ -106,6 +117,13 @@ Route::group(['prefix' => "admin", "middleware" => ['auth', sprintf("role:%s", \
     Route::get('/courses', 'AdminController@courses')->name('admin.courses');
     Route::get('/courses_json', 'AdminController@coursesJson')->name('admin.courses_json');
     Route::post('/courses/updateStatus', 'AdminController@updateCourseStatus');
+
+    Route::get('categorias','AdminController@categories_courses')->name('admin.categories_index');
+    Route::post('categorias/store','AdminController@store')->name('admin.store');
+    Route::get('categorias/store','AdminController@create')->name('admin.create');
+    Route::put('categorias/{categorias}','AdminController@update')->name('admin.update');
+    Route::delete('categorias/{categorias}','AdminController@destroy')->name('admin.destroy');
+    Route::get('categorias/{categorias}/edit','AdminController@edit')->name('admin.edit');
 
 
     Route::get('/teachers', 'AdminController@teachers')->name('admin.teachers');

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Course;
+use App\Http\Requests\CategoriaRequest;
 use App\Mail\CourseApproved;
 use App\Mail\CourseRejected;
 use App\Teacher;
@@ -17,6 +19,54 @@ class AdminController extends Controller
     {
         return view('admin.courses');
     }
+    public function categories_courses()
+    {
+        $categorias = Category::paginate();
+
+        return view('admin.categories_index',compact('categorias'));
+    }
+
+    public function create()
+    {
+
+        return view('admin.create');
+    }
+
+
+    public function store(CategoriaRequest $request)
+    {
+        $categoria= Category::create($request-> all());
+
+        return redirect()->route('admin.categories_index',$categoria-> id)
+            ->with('message', ['success', __("Categoría Guardada Con Éxito")]);
+    }
+
+    public function edit(Category $categorias)
+    {
+        return view('admin.edit', compact('categorias'));
+
+    }
+
+
+
+    public function update(CategoriaRequest $request, Category $categorias)
+    {
+        $categorias->update($request->all());
+
+
+        return redirect()->route('admin.edit',$categorias-> id)
+            ->with('message', ['success', __("Categoría Actualizada Con Éxito")]);
+    }
+
+
+    public function destroy(Category $categorias)
+    {
+        $categorias ->delete();
+
+        return back()->with('message', ['success', __("Categoría Eliminada Con Éxito")]);
+    }
+
+
 
     public function coursesJson()
     {

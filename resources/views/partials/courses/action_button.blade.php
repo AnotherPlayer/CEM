@@ -1,18 +1,18 @@
 <div class="col-2">
     @auth
         @can('opt_for_course', $course)
-            @can('subscribe', $course)
-                <a class="btn btn-subscribe btn-bottom btn-block" href="{{route('courses.inscribe',$course->slug )}}">
+            @can('subscribe', \App\Course::class)
+                <a class="btn btn-subscribe btn-bottom btn-block" href="{{ route('paypal.pay_paypal' ,$course->slug) }}">
                     <i class="fa fa-bolt"></i> {{ __("Comprar") }}
                 </a>
             @else
                 @can('inscribe', $course)
-                    <a class="btn btn-subscribe btn-bottom btn-block" href="{{route('courses.inscribe' ,$course->slug)}}">
-                        <i class="fa fa-bolt"></i> {{ __("Adquirir") }}
+                    <a class="btn btn-subscribe btn-bottom btn-block" href="{{ route('courses.inscribe', ['slug' => $course->slug]) }}">
+                        <i class="fa fa-bolt"></i> {{ __("Inscribirme") }}
                     </a>
                 @else
                     <a class="btn btn-subscribe btn-bottom btn-block" href="#">
-                        <i class="fa fa-bolt"></i> {{ __("Adquirido") }}
+                        <i class="fa fa-bolt"></i> {{ __("Inscrito") }}
                     </a>
                 @endcan
             @endcan
