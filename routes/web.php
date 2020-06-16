@@ -24,14 +24,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/send-mail',function (){
-   $details =[
-       'title' => 'Mail from CEM',
-       'body'=>"Esta es una prueba de envios de correo"
-   ];
-   Mail::to('lv428694@gmail.com')->send(new App\Mail\TestMail($details));
-   echo "Email ha sido enviado";
-});
+
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');

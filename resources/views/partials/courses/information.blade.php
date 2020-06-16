@@ -12,9 +12,8 @@
                     <h5>{{ __("Categoría") }}: {{ $course->category->name }}</h5>
                     <h5>{{ __("Fecha de publicación") }}: {{ $course->created_at->format('d/m/Y') }}</h5>
                     <h5>{{ __("Fecha de actualización") }}: {{ $course->updated_at->format('d/m/Y') }}</h5>
-                    <h6>{{ __("Estudiantes inscritos") }}: {{ $course->students_count }}</h6>
-
-
+                    <h5>{{ __("Precio: $249.00 mx") }}</h5>
+                    <h5>{{ __("Estudiantes inscritos") }}: {{ $course->students_count }}</h5>
                 </div>
 
                 @include('partials.courses.action_button')

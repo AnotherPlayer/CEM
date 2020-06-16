@@ -33,7 +33,7 @@ class AdminController extends Controller
     }
 
 
-    public function store(CategoriaRequest $request)
+    public function store(Request $request)
     {
         $categoria= Category::create($request-> all());
 
@@ -49,7 +49,7 @@ class AdminController extends Controller
 
 
 
-    public function update(CategoriaRequest $request, Category $categorias)
+    public function update(Request $request, Category $categorias)
     {
         $categorias->update($request->all());
 

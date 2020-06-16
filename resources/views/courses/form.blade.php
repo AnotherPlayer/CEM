@@ -97,6 +97,11 @@
                             <label for="yt" class="col-md-4 col-form-label text-md-right"> {{__("URL a la Playlist")}}</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control" id="yt" name="youtube_url"  value=" {{old('youtube_url') ?: $course->youtube_url}}" />
+                                @if($errors->has('youtube_url'))
+                                    <span class="invalid-feedback">
+                                    <strong>{{$errors->first('youtube_url')}}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -157,7 +162,7 @@
                         <div class="card-body">
                             <div class="form-row row">
                                 <label for="goal1" class="col-md-4 col-form-label text-md-right">
-                                    {{__("Meta 1")}}
+                                    {{__("Meta ")}}
                                 </label>
                                 <div class="col-md-6">
                                 <input id="goal1" class="form-control{{ $errors->has('goals.0') ? ' is-invalid' : ''}}" name="goals[]"
@@ -173,26 +178,8 @@
                                     <input type="hidden" name="goald_id0" value="{{ $course->goals[0]->id }}"/>
                                 @endif
                             </div>
-                            <br>
-                            {{-- Meta 2 --}}
-                            <div class="form-row row">
-                                <label for="goal2" class="col-md-4 col-form-label text-md-right">
-                                    {{__("Meta 2")}}
-                                </label>
-                                <div class="col-md-6">
-                                <input id="goal2" class="form-control{{ $errors->has('goals.1') ? ' is-invalid' : ''}}" name="goals[]"
-                                    value="{{old('goals.1') ? old('goals.1') : ($course->goals_count > 1 ? $course->goals[1]->goal : '')}}"/>
 
-                                    @if($errors->has('goals.1'))
-                                        <span class="invalid-feedback">
-                                        <strong>{{  $errors->first('requirements.1') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                @if($course->goals_count > 1)
-                                    <input type="hidden" name="goal_id1" value="{{ $course->goals[1]->id }}"/>
-                                @endif
-                            </div>
+
                         </div>
                     </div>
                 </div>
