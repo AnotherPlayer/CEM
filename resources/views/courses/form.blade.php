@@ -94,9 +94,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="yt" class="col-md-4 col-form-label text-md-right"> {{__("URL a la Playlist")}}</label>
+                            <label for="youtube_url" class="col-md-4 col-form-label text-md-right"> {{__("URL a la Playlist")}}</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="yt" name="youtube_url"  value=" {{old('youtube_url') ?: $course->youtube_url}}" />
+                                <input type="text" name="youtube_url" id="youtube_url" class="form-control{{ $errors->has('youtube_url') ? ' is-invalid' : ''}}"
+                                       value="{{ old('youtube_url') ?: $course->youtube_url}}" required autofocus/>
                                 @if($errors->has('youtube_url'))
                                     <span class="invalid-feedback">
                                     <strong>{{$errors->first('youtube_url')}}</strong>

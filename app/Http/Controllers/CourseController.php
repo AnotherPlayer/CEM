@@ -38,7 +38,10 @@ class CourseController extends Controller
 
     public function inscribe(Course $course)
     {
+
         $course->students()->attach(auth()->user()->student->id);
+
+        \Mail::to($course->teacher->user)->send(new NewStudentInCourse($course, auth()->user()->name));
         return back()->with('message', ['success', __("Inscrito correctamente al curso")]);
     }
 

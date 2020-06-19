@@ -36,6 +36,16 @@ class TeacherController extends Controller
     public function sendMessageToStudent()
     {
 
-        return response()->json(['res' => true]);
+        $info = \request('info');
+        $data = [];
+        parse_str($info, $data);
+        $user = User::findOrFail($data['user_id']);
+        try {
+            \Mail::to($user)->send(new MessageToStudent( auth()->user()->name, $data['message']));
+            $success = true;
+        } catch (\Exception $exception) {
+            $success = false;
+        }
+        return response()->json(['res' => $success]);
     }
 }

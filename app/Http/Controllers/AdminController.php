@@ -79,27 +79,26 @@ class AdminController extends Controller
         return abort(401);
     }
 
-    public function updateCourseStatus()
-    {
+    public function updateCourseStatus () {
         if (\request()->ajax()) {
             $course = Course::find(\request('courseId'));
 
-            if (
-                (int)$course->status !== Course::PUBLISHED &&
-                !$course->previous_approved &&
+            if(
+                (int) $course->status !== Course::PUBLISHED &&
+                ! $course->previous_approved &&
                 \request('status') === Course::PUBLISHED
             ) {
                 $course->previous_approved = true;
-
+                \Mail::to($course->teacher->user)->send(new CourseApproved($course));
             }
 
-            if (
-                (int)$course->status !== Course::REJECTED &&
-                !$course->previous_rejected &&
+            if(
+                (int) $course->status !== Course::REJECTED &&
+                ! $course->previous_rejected &&
                 \request('status') === Course::REJECTED
             ) {
                 $course->previous_rejected = true;
-
+                \Mail::to($course->teacher->user)->send(new CourseRejected($course));
             }
 
             $course->status = \request('status');
