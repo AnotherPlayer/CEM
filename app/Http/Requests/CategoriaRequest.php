@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
 
 class CategoriaRequest extends FormRequest
 {
@@ -24,7 +26,9 @@ class CategoriaRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' =>'required|unique:categories,name'.$this->tag
+            'name' =>[
+                'required',
+                Rule::unique('categories')->ignore($this->route('categorias'))]
         ];
     }
     public function messages()

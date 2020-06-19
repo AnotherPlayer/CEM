@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Course;
 use App\Http\Requests\CategoriaRequest;
+use App\Http\Requests\CourseRequest;
 use App\Mail\CourseApproved;
 use App\Mail\CourseRejected;
 use App\Teacher;
@@ -33,7 +34,7 @@ class AdminController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(CategoriaRequest $request)
     {
         $categoria= Category::create($request-> all());
 
@@ -49,7 +50,7 @@ class AdminController extends Controller
 
 
 
-    public function update(Request $request, Category $categorias)
+    public function update(CategoriaRequest $request, Category $categorias)
     {
         $categorias->update($request->all());
 
